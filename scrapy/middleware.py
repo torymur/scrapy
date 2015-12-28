@@ -28,7 +28,9 @@ class MiddlewareManager(object):
     def from_settings(cls, settings, crawler=None):
         mwlist = cls._get_mwlist_from_settings(settings)
         middlewares = []
+        logger.info('Custom scrapy version, mw list {}'.format(mwlist))
         for clspath in mwlist:
+            logger.info('MW class path is: {}'.format(clspath))
             try:
                 mwcls = load_object(clspath)
                 if crawler and hasattr(mwcls, 'from_crawler'):
